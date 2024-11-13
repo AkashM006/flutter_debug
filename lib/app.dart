@@ -1,6 +1,6 @@
-import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_debug/database/database.dart';
+import 'package:flutter_debug/models/task.model.dart';
+import 'package:flutter_debug/providers/task.provider.dart';
 import 'package:flutter_debug/widgets/drift_debug.widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,15 +9,23 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void onGo() {
+    void onGo() async {
       try {
-        const newTask = TasksCompanion(
-          title: Value("Take out trash"),
-          description:
-              Value("Take out the trash and wait for the collector to pick up"),
+        // Adding a Task
+        const newTask = TaskModel(
+          name: "Task E",
+          description: "Task E description",
         );
 
-        ref.read(dbProvider).tasksDao.insertTask(newTask);
+        await ref.read(taskProvider.notifier).addTask(newTask);
+
+        // Deleting a Task
+        // await ref.read(taskProvider.notifier).deleteTask(3);
+
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Done")),
+        );
       } catch (e) {
         print("Error occurred");
       }

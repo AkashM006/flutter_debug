@@ -18,4 +18,10 @@ class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
       await into(tasks).insert(task);
     }, "inserting task");
   }
+
+  Future<void> deleteTask(int id) async {
+    handleError(() async {
+      await (delete(tasks)..where((tbl) => tbl.id.equals(id))).go();
+    }, "deleting task");
+  }
 }
