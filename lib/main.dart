@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_debug/app.dart';
+import 'package:flutter_debug/settings.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -15,8 +16,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: App(),
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: kSeedColor,
+          brightness: Brightness.light,
+        ),
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.system,
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: kSeedColor,
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      home: const App(),
     );
   }
 }
