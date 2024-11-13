@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_debug/database/database.dart';
 import 'package:flutter_debug/database/schema/task.schema.dart';
+import 'package:flutter_debug/utils/db_error_handler.util.dart';
 
 part 'task.dao.g.dart';
 
@@ -13,6 +14,8 @@ class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
   }
 
   Future<void> insertTask(TasksCompanion task) async {
-    await into(tasks).insert(task);
+    handleError(() async {
+      await into(tasks).insert(task);
+    }, "inserting task");
   }
 }

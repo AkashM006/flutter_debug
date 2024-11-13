@@ -7,6 +7,10 @@ Future<T> handleError<T>(
   try {
     return await operation();
   } catch (e) {
+    print("-----------------------");
+    print("Error occurred: ");
+    print(e);
+    print("-----------------------");
     if (e is AppError) rethrow;
     throw const AppError(
       message:

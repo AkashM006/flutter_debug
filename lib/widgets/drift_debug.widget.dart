@@ -22,6 +22,7 @@ class DriftDebugWidget extends ConsumerWidget {
     return IconButton(
       onPressed: onDebug,
       icon: const Icon(Icons.bug_report),
+      color: Theme.of(context).colorScheme.error,
     );
   }
 }
