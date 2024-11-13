@@ -4,11 +4,13 @@ import 'package:drift/native.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_debug/database/dao/task.dao.dart';
 import 'package:flutter_debug/database/schema/task.schema.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 // ignore: depend_on_referenced_packages
 import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database.g.dart';
 
@@ -56,4 +58,9 @@ LazyDatabase _openConnection() {
 
     return NativeDatabase.createInBackground(file);
   });
+}
+
+@Riverpod(keepAlive: true)
+AppDatabase db(Ref ref) {
+  return AppDatabase();
 }
