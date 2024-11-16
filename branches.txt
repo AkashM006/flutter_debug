@@ -3,3 +3,4 @@ Branch list and their contents:
 2. drift - In order to debug queries fast and check in drift
 3. theme - Merge this branch when creating new branches to get theme setup
 4. utils - Merge this branch to get all the util files
+5. layout - In order to understand the behaviours of different widgets and how to put them together
