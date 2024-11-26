@@ -24,4 +24,24 @@ class Task extends _$Task {
       print("Error occurred;");
     }
   }
+
+  Future<void> getTableData() async {
+    try {
+      // await ref.read(dbProvider).tasksDao.deleteTask(id);
+      final db = ref.read(dbProvider);
+      final statements = await db
+          .customSelect('SELECT sql FROM sqlite_master WHERE type="table"')
+          .get();
+      print("Result: ${statements.length}");
+
+      for (final statement in statements) {
+        print(statement.read<String>('sql'));
+      }
+    } catch (e) {
+      print("------------------");
+      print("Error occurred;");
+      print(e);
+      print("------------------");
+    }
+  }
 }

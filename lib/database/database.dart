@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:drift/native.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_debug/database/dao/task.dao.dart';
+import 'package:flutter_debug/database/init/task.data.dart';
 import 'package:flutter_debug/database/schema/task.schema.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,6 +35,10 @@ class AppDatabase extends _$AppDatabase {
     return MigrationStrategy(
       onCreate: (Migrator m) async {
         await m.createAll();
+        print("Create all");
+        await batch((batch) async {
+          batch.insertAll(tasks, initTasks);
+        });
       },
       onUpgrade: (Migrator m, int from, int to) async {
         if (from < 2) {

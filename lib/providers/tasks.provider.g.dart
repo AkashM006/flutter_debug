@@ -1,24 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task.provider.dart';
+part of 'tasks.provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskHash() => r'cf34c7de0f4b18276966ef3a82bcbdbe50e9f790';
+String _$tasksHash() => r'bd1bc75aa0e67ba67795fd903877ed796dff605f';
 
-/// See also [Task].
-@ProviderFor(Task)
-final taskProvider = AutoDisposeNotifierProvider<Task, void>.internal(
-  Task.new,
-  name: r'taskProvider',
+/// See also [tasks].
+@ProviderFor(tasks)
+final tasksProvider = AutoDisposeFutureProvider<List<TaskModel>>.internal(
+  tasks,
+  name: r'tasksProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$taskHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$tasksHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Task = AutoDisposeNotifier<void>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef TasksRef = AutoDisposeFutureProviderRef<List<TaskModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

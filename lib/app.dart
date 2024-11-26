@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_debug/models/task.model.dart';
 import 'package:flutter_debug/providers/task.provider.dart';
+import 'package:flutter_debug/providers/tasks.provider.dart';
 import 'package:flutter_debug/widgets/drift_debug.widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,6 +32,8 @@ class App extends ConsumerWidget {
       }
     }
 
+    final tasks = ref.watch(tasksProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
@@ -42,10 +45,26 @@ class App extends ConsumerWidget {
         onPressed: onGo,
         child: const Icon(Icons.air_outlined),
       ),
+      // body: Center(
+      //   child: Text(
+      //     "Hello world!",
+      //     style: Theme.of(context).textTheme.headlineLarge,
+      //   ),
+      // ),
       body: Center(
-        child: Text(
-          "Hello world!",
-          style: Theme.of(context).textTheme.headlineLarge,
+        child: tasks.when(
+          data: (data) {
+            if (data.isEmpty) return const Text("No Data");
+
+            return ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(data[index].name),
+              ),
+            );
+          },
+          error: (error, stackTrace) => Text(error.toString()),
+          loading: () => const CircularProgressIndicator(),
         ),
       ),
     );
